@@ -66,8 +66,7 @@ bool UserpathPlannerManager<S>::LoadParameters(const ros::NodeHandle& n) {
   if (!PlannerManager<S>::LoadParameters(n)) return false;
 
   // Topics
-  // if (!nl.getParam("topic/userpoint", userpoint_topic_)) return false; 
-  
+  // if (!nl.getParam("toMaybeRequestTrajectorypic/userpoint", userpoint_topic_)) return false; 
   return true;
 }
 
@@ -88,18 +87,18 @@ bool UserpathPlannerManager<S>::RegisterCallbacks(const ros::NodeHandle& n) {
 
 
   // Test Points
- //  Userpoint * first_point = new Userpoint("1", std::vector<double>{1, 1, 1});
+   //Userpoint * first_point = new Userpoint("1", std::vector<double>{1, 1, 1});
 	// current_point = *first_point;
 	// this->goal_.x = current_point.location;
 	// MaybeRequestTrajectory();
 
- //  Userpoint * second_point = new Userpoint("2", std::vector<double>{1, 2, 1});
+  // Userpoint * second_point = new Userpoint("2", std::vector<double>{1, 2, 1});
 	// current_point.next = second_point;
 	// current_point = *second_point;
 	// this->goal_.x = current_point.location;
 	// MaybeRequestTrajectory();
 
- //  Userpoint * third_point = new Userpoint("3", std::vector<double>{1, 3, 1});
+  // Userpoint * third_point = new Userpoint("3", std::vector<double>{1, 3, 1});
 	// current_point.next = third_point;
 	// current_point = *third_point;
 	// this->goal_.x = current_point.location;
@@ -108,7 +107,6 @@ bool UserpathPlannerManager<S>::RegisterCallbacks(const ros::NodeHandle& n) {
 	// userpoints.insert(std::pair<std::string, Userpoint*>(first_point->id, first_point));
 	// userpoints.insert(std::pair<std::string, Userpoint*>(second_point->id, second_point));
 	// userpoints.insert(std::pair<std::string, Userpoint*>(third_point->id, third_point));
-
 
   return true;
 }
@@ -212,8 +210,8 @@ void UserpathPlannerManager<S>::MaybeRequestTrajectory() {
   // Publish marker at goal location. 
   VisualizeGoal();
 
-  //if (!this->ready_ || this->waiting_for_traj_)
-    //return;
+  if (!this->ready_ || this->waiting_for_traj_)
+    return;
 
   // Set start and goal states.
   fastrack_msgs::ReplanRequest msg;
@@ -232,6 +230,7 @@ void UserpathPlannerManager<S>::MaybeRequestTrajectory() {
 		ROS_INFO("enter interpolation");
     // Catch trajectory that's too short.
     if (this->traj_.LastTime() < msg.start_time) {
+      ROS_INFO("Start time:%f and Last time: %f", msg.start_time, this->traj_.LastTime());
       ROS_WARN("%s: Current trajectory is too short. Cannot interpolate.",
                 this->name_.c_str());
       msg.start = this->traj_.LastState().ToRos();
@@ -253,8 +252,8 @@ template<typename S>
 void UserpathPlannerManager<S>::TimerCallback(const ros::TimerEvent& e) {
 	// ROS_INFO("enter TimerCallback function");
 
-  //if (!this->ready_)
-    //return;
+  if (!this->ready_)
+    return;
 
   if (this->traj_.Size() == 0) {
     ROS_INFO("enter callback 1");
@@ -272,6 +271,7 @@ void UserpathPlannerManager<S>::TimerCallback(const ros::TimerEvent& e) {
 	//ROS_INFO("afterwards");
   // Interpolate the current trajectory.
   const S planner_x = this->traj_.Interpolate(ros::Time::now().toSec());
+  //ROS_INFO("x:%f, y:%f, z:%f", planner_x.X(),planner_x.Y(),planner_x.Z());
 
   // If the current time is past the end time, then we have reached the current goal and can update to the next userpoint
   if(this->traj_.LastTime() - ros::Time::now().toSec() < -1) {
@@ -311,7 +311,7 @@ void UserpathPlannerManager<S>::TimerCallback(const ros::TimerEvent& e) {
 // Converts the goal state into a Rviz marker. 
 template<typename S>
 void UserpathPlannerManager<S>::VisualizeGoal() const {
-
+  ROS_INFO("enter userpath VisualizeGoal");
   PlannerManager<S>::VisualizeGoal();
 
 }

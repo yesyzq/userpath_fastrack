@@ -8,3 +8,4 @@
 
 # modified environment variables
 export PWD="/home/ros/userpath_fastrack/build"
+export ROS_PACKAGE_PATH="/home/ros/userpath_fastrack/src:/home/ros/fastrack/ros/src:/home/ros/crazyflie_clean/ros/src:/opt/ros/kinetic/share"

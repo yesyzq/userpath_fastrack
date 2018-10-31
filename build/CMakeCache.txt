@@ -29,6 +29,10 @@ CATKIN_ENABLE_TESTING:BOOL=ON
 //Catkin skip testing
 CATKIN_SKIP_TESTING:BOOL=OFF
 
+//Replace the CMake install command with a custom implementation
+// using symlinks instead of copying resources
+CATKIN_SYMLINK_INSTALL:BOOL=OFF
+
 //List of ';' separated packages to build
 CATKIN_WHITELIST_PACKAGES:STRING=
 
@@ -193,7 +197,7 @@ EMPY_EXECUTABLE:FILEPATH=/usr/bin/empy
 EMPY_SCRIPT:STRING=/usr/bin/empy
 
 //The directory containing a CMake configuration file for Eigen3.
-Eigen3_DIR:PATH=/usr/local/share/eigen3/cmake
+Eigen3_DIR:PATH=/usr/lib/cmake/eigen3
 
 //The directory containing a CMake configuration file for GMock.
 GMock_DIR:PATH=GMock_DIR-NOTFOUND
@@ -228,8 +232,17 @@ OMPLAPPBASE_LIBRARY:FILEPATH=OMPLAPPBASE_LIBRARY-NOTFOUND
 //Path to a library.
 OMPLAPP_LIBRARY:FILEPATH=OMPLAPP_LIBRARY-NOTFOUND
 
+//Path to a file.
+OMPL_CONFIG:FILEPATH=/opt/ros/kinetic/include/ompl/config.h
+
+//Path to a file.
+OMPL_INCLUDE_DIRS:PATH=/opt/ros/kinetic/include/ompl/base
+
 //Path to a library.
 OMPL_LIBRARIES:FILEPATH=/usr/local/lib/libompl.so
+
+//Path to a library.
+OMPL_LIBRARY:FILEPATH=/opt/ros/kinetic/lib/x86_64-linux-gnu/libompl.so
 
 //Path to a program.
 PYTHON_EXECUTABLE:FILEPATH=/usr/bin/python
@@ -310,7 +323,7 @@ message_generation_DIR:PATH=/opt/ros/kinetic/share/message_generation/cmake
 message_runtime_DIR:PATH=/opt/ros/kinetic/share/message_runtime/cmake
 
 //The directory containing a CMake configuration file for ompl.
-ompl_DIR:PATH=/usr/local/lib/cmake/ompl
+ompl_DIR:PATH=/opt/ros/kinetic/share/ompl
 
 //The directory containing a CMake configuration file for rosconsole.
 rosconsole_DIR:PATH=/opt/ros/kinetic/share/rosconsole/cmake
@@ -513,6 +526,8 @@ CMAKE_STRIP-ADVANCED:INTERNAL=1
 CMAKE_UNAME:INTERNAL=/bin/uname
 //ADVANCED property for variable: CMAKE_VERBOSE_MAKEFILE
 CMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1
+//Details about finding OMPL
+FIND_PACKAGE_MESSAGE_DETAILS_OMPL:INTERNAL=[/usr/local/lib/libompl.so][/opt/ros/kinetic/include][v()]
 //Details about finding PythonInterp
 FIND_PACKAGE_MESSAGE_DETAILS_PythonInterp:INTERNAL=[/usr/bin/python][v2.7.12()]
 //Details about finding ompl

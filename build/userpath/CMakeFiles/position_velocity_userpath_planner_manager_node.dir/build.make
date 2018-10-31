@@ -91,8 +91,8 @@ position_velocity_userpath_planner_manager_node_EXTERNAL_OBJECTS =
 /home/ros/userpath_fastrack/devel/lib/userpath/position_velocity_userpath_planner_manager_node: userpath/CMakeFiles/position_velocity_userpath_planner_manager_node.dir/src/position_velocity_userpath_planner_manager_node.cpp.o
 /home/ros/userpath_fastrack/devel/lib/userpath/position_velocity_userpath_planner_manager_node: userpath/CMakeFiles/position_velocity_userpath_planner_manager_node.dir/build.make
 /home/ros/userpath_fastrack/devel/lib/userpath/position_velocity_userpath_planner_manager_node: /home/ros/fastrack/ros/devel/lib/libfastrack.so
-/home/ros/userpath_fastrack/devel/lib/userpath/position_velocity_userpath_planner_manager_node: /usr/local/lib/libompl.so
-/home/ros/userpath_fastrack/devel/lib/userpath/position_velocity_userpath_planner_manager_node: /usr/local/lib/libmatio.so
+/home/ros/userpath_fastrack/devel/lib/userpath/position_velocity_userpath_planner_manager_node: /opt/ros/kinetic/lib/x86_64-linux-gnu/libompl.so
+/home/ros/userpath_fastrack/devel/lib/userpath/position_velocity_userpath_planner_manager_node: /usr/lib/x86_64-linux-gnu/libmatio.so
 /home/ros/userpath_fastrack/devel/lib/userpath/position_velocity_userpath_planner_manager_node: /usr/lib/x86_64-linux-gnu/libflann.so
 /home/ros/userpath_fastrack/devel/lib/userpath/position_velocity_userpath_planner_manager_node: /opt/ros/kinetic/lib/libtf2_ros.so
 /home/ros/userpath_fastrack/devel/lib/userpath/position_velocity_userpath_planner_manager_node: /opt/ros/kinetic/lib/libactionlib.so

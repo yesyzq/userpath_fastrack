@@ -22,8 +22,7 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "/home/ros/fastrack/ros/src/fastrack/include"
   "/opt/ros/kinetic/include"
   "/opt/ros/kinetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp"
-  "/usr/local/include"
-  "/usr/local/include/eigen3"
+  "/usr/include/eigen3"
   "/home/ros/userpath_fastrack/src/userpath/include"
   )
 

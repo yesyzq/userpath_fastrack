@@ -2,13 +2,14 @@
 
 <launch>
   <!-- ========================== Additional Launch Files ========================= -->
-  <include file="$(find fastrack_crazyflie_demos)/launch/rviz.launch"/>
+<!--   <include file="$(find fastrack_crazyflie_demos)/launch/rviz.launch"/>
   <include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch" >
      <arg name="port" value="9090"/>
-  </include>
+  </include> -->
 
   <!-- Topics. -->
   <!-- <arg name="userpoint_topic" default="/userpoint" /> -->
+  <arg name="prefix" default="drone0" />
 
   <arg name="position_velocity_yaw_state_topic" default="/state/position_velocity_yaw" />
   <arg name="position_velocity_state_topic" default="/state/position_velocity" />
@@ -67,8 +68,9 @@
   <arg name="planner_vy" default="0.1" />
   <arg name="planner_vz" default="0.1" />
   <arg name="planner_runtime" default="0.5" />
-
-  <!-- Time steps. -->
+<!--
+  <include file="$(find userpoint_publisher)/launch/publisher.launch">
+  </include>  -->
   <arg name="simulator_dt" default="0.001" />
   <arg name="estimator_dt" default="0.005" />
   <arg name="sensor_dt" default="0.1" />
@@ -115,7 +117,7 @@
     <arg name="planner_state_topic" value="$(arg fastrack_reference_state_topic)" />
     <arg name="control_topic" value="$(arg fastrack_control_topic)" />
     <arg name="bound_topic" value="$(arg bound_vis_topic)" />
-    <arg name="planner_frame" value="$(arg planner_frame)" />
+    <arg name="planner_frame" value="$(arg prefix)/$(arg planner_frame)" />
     <arg name="bound_srv" value="$(arg bound_srv)" />
     <arg name="planner_dynamics_srv" value="$(arg planner_dynamics_srv)" />
     <arg name="planner_vx" value="$(arg planner_vx)" />
@@ -155,11 +157,12 @@
     <arg name="ref_topic" value="$(arg fastrack_reference_state_topic)" />
     <arg name="traj_vis" value="$(arg traj_vis_topic)" />
     <arg name="fixed_frame" value="$(arg fixed_frame)" />
-    <arg name="planner_frame" value="$(arg planner_frame)" />
+    <arg name="planner_frame" value="$(arg prefix)/$(arg planner_frame)" />
     <arg name="planner_runtime" value="$(arg planner_runtime)" />
     <arg name="goal" value="[$(arg goal_x), $(arg goal_y), $(arg goal_z)]" />
     <arg name="start" value="[$(arg takeoff_hover_x), $(arg takeoff_hover_y), $(arg takeoff_hover_z)]" />
     <!-- <arg name="userpoint_topic" value="$(arg userpoint_topic)" /> -->
+    <arg name="goal_vis" value="$(arg prefix)" />  
   </include>
 
   <!-- Replanner. -->
@@ -177,7 +180,7 @@
     <arg name="sensor_vis_topic" value="$(arg sensor_vis_topic)" />
     <arg name="env_vis_topic" value="$(arg true_env_vis_topic)" />
     <arg name="fixed_frame" value="$(arg fixed_frame)" />
-    <arg name="sensor_frame" value="$(arg tracker_frame)" />
+    <arg name="sensor_frame" value="$(arg prefix)/$(arg tracker_frame)" />
     <arg name="time_step" value="$(arg sensor_dt)" />
     <arg name="range" value="$(arg sensor_range)" />
     <arg name="env_upper_x" value="$(arg env_upper_x)" />
@@ -223,7 +226,7 @@
   <node pkg="tf"
         type="static_transform_publisher"
         name="tracker_base_link_publisher"
-        args="0 0 0 0 0 0 1 $(arg tracker_frame) $(arg tracker_frame)/base_link 100">
+        args="0 0 0 0 0 0 1 $(arg prefix)/$(arg tracker_frame) $(arg prefix)/$(arg tracker_frame)/base_link 100">
   </node>
 
   <!-- Crazyflie dynamics simulator. -->
@@ -238,7 +241,7 @@
     <param name="init/z" value="$(arg sim_init_z)" />
 
     <param name="frames/fixed" value="$(arg fixed_frame)" />
-    <param name="frames/robot" value="$(arg tracker_frame)" />
+    <param name="frames/robot" value="$(arg prefix)/$(arg tracker_frame)" />
 
     <param name="topics/control" value="$(arg final_control_topic)" />
   </node>
@@ -253,7 +256,7 @@
     <param name="time_step" value="$(arg estimator_dt)" />
 
     <param name="frames/fixed" value="$(arg fixed_frame)" />
-    <param name="frames/robot" value="$(arg tracker_frame)" />
+    <param name="frames/robot" value="$(arg prefix)/$(arg tracker_frame)" />
 
     <param name="topics/state" value="$(arg position_velocity_yaw_state_topic)" />
   </node>
@@ -267,7 +270,7 @@
     <param name="time_step" value="$(arg estimator_dt)" />
 
     <param name="frames/fixed" value="$(arg fixed_frame)" />
-    <param name="frames/robot" value="$(arg tracker_frame)" />
+    <param name="frames/robot" value="$(arg prefix)/$(arg tracker_frame)" />
 
     <param name="topics/state" value="$(arg position_velocity_state_topic)" />
   </node>
@@ -332,7 +335,4 @@
     <param name="topics/in_flight" value="$(arg in_flight_topic)" />
   </node>
 
-  <include file="$(find userpoint_publisher)/launch/publisher.launch">
-    <!-- <arg name="userpoint_topic" value="$(arg userpoint_topic)" /> -->
-  </include>
 </launch>
