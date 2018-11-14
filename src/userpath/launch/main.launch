@@ -20,5 +20,5 @@
   </group>
 
 
-  <include file="$(find userpoint_publisher)/launch/publisher.launch"> </include> 
+  <!-- <include file="$(find userpoint_publisher)/launch/publisher.launch"> </include>  -->
 </launch>
