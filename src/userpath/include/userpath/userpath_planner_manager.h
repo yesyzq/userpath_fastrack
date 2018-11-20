@@ -86,7 +86,7 @@ bool UserpathPlannerManager<S>::RegisterCallbacks(const ros::NodeHandle& n) {
     userpoint_topic_.c_str(), 1, &UserpathPlannerManager::UserpointCallback, this);
 
 
-  // Test Points
+  // Test Pointstemplate<typename S>
    //Userpoint * first_point = new Userpoint("1", std::vector<double>{1, 1, 1});
 	// current_point = *first_point;
 	// this->goal_.x = current_point.location;
@@ -204,8 +204,6 @@ void UserpathPlannerManager<S>::UserpointCallback(const userpath_msgs::Userpoint
 // classes with more specific replanning needs.
 template<typename S>
 void UserpathPlannerManager<S>::MaybeRequestTrajectory() {
-  
-  ROS_INFO("enter callback function");
 
   // Publish marker at goal location. 
   VisualizeGoal();

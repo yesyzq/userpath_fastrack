@@ -7,18 +7,18 @@
      <arg name="port" value="9090"/>
   </include>
 
-  <group ns="drone1">
+  <group ns="drone0">
   	<include file="$(find userpath)/launch/sw_demo.launch">
   		<arg name="prefix" value="drone1" />
   	</include>
   </group>
 
-  <group ns="drone2">
+  <group ns="drone1">
   	<include file="$(find userpath)/launch/sw_demo.launch">
   		<arg name="prefix" value="drone2" />
   	</include>
   </group>
 
 
-  <!-- <include file="$(find userpoint_publisher)/launch/publisher.launch"> </include>  -->
+  <include file="$(find userpoint_publisher)/launch/publisher.launch"> </include> 
 </launch>
