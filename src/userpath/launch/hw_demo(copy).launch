@@ -2,40 +2,44 @@
 
 <launch>
   <!-- ========================== Additional Launch Files ========================= -->
+<!--  <include file="$(find fastrack_crazyflie_demos)/launch/rviz.launch"/> -->
+  <include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch" >
+     <arg name="port" value="9090"/>
+  </include>
+
   <!-- To change drones, change the default arg to uriA, uriB, uriC or uriD -->
   <arg name="uri" default="$(arg uri)" />
-  <arg name="prefix" default="drone0" />
 
 <!-- Topics. -->
-<!--   <arg name="userpoint_topic" default="/$(arg prefix)/userpoint" /> -->
+  <arg name="userpoint_topic" default="/userpoint" />
 
-  <arg name="position_velocity_yaw_state_topic" default="/$(arg prefix)/state/position_velocity_yaw" />
-  <arg name="position_velocity_state_topic" default="/$(arg prefix)/state/position_velocity" />
-  <arg name="replan_request_topic" default="/$(arg prefix)/replan" />
-  <arg name="traj_topic" default="/$(arg prefix)/traj" />
-  <arg name="fastrack_state_topic" default="/$(arg prefix)/state/fastrack" />
-  <arg name="fastrack_reference_state_topic" default="/$(arg prefix)/ref/fastrack" />
-  <arg name="reference_state_topic" default="/$(arg prefix)/ref/position_velocity" />
-  <arg name="in_flight_topic" default="/$(arg prefix)/in_flight" />
+  <arg name="position_velocity_yaw_state_topic" default="/state/position_velocity_yaw" />
+  <arg name="position_velocity_state_topic" default="/state/position_velocity" />
+  <arg name="replan_request_topic" default="/replan" />
+  <arg name="traj_topic" default="/traj" />
+  <arg name="fastrack_state_topic" default="/state/fastrack" />
+  <arg name="fastrack_reference_state_topic" default="/ref/fastrack" />
+  <arg name="reference_state_topic" default="/ref/position_velocity" />
+  <arg name="in_flight_topic" default="/in_flight" />
 
-  <arg name="lqr_control_topic" default="/$(arg prefix)/control/lqr" />
-  <arg name="fastrack_control_topic" default="/$(arg prefix)/control/fastrack" />
-  <arg name="prioritized_control_topic" default="/$(arg prefix)/control/prioritized" />
-  <arg name="merged_control_topic" default="/$(arg prefix)/control/merged" />
-  <arg name="takeoff_control_topic" default="/$(arg prefix)/control/takeoff" />
-  <arg name="final_control_topic" default="/$(arg prefix)/control/final" />
+  <arg name="lqr_control_topic" default="/control/lqr" />
+  <arg name="fastrack_control_topic" default="/control/fastrack" />
+  <arg name="prioritized_control_topic" default="/control/prioritized" />
+  <arg name="merged_control_topic" default="/control/merged" />
+  <arg name="takeoff_control_topic" default="/control/takeoff" />
+  <arg name="final_control_topic" default="/control/final" />
 
-  <arg name="sensor_topic" default="/$(arg prefix)/sensor" />
-  <arg name="updated_env_topic" default="/$(arg prefix)/updated_env" />
-  <arg name="sensor_vis_topic" default="/$(arg prefix)/vis/sensor" />
-  <arg name="traj_vis_topic" default="/$(arg prefix)/vis/traj" />
-  <arg name="bound_vis_topic" default="/$(arg prefix)/vis/bound" />
-  <arg name="known_env_vis_topic" default="/$(arg prefix)/vis/known_env" />
-  <arg name="true_env_vis_topic" default="/$(arg prefix)/vis/true_env" />
+  <arg name="sensor_topic" default="/sensor" />
+  <arg name="updated_env_topic" default="/updated_env" />
+  <arg name="sensor_vis_topic" default="/vis/sensor" />
+  <arg name="traj_vis_topic" default="/vis/traj" />
+  <arg name="bound_vis_topic" default="/vis/bound" />
+  <arg name="known_env_vis_topic" default="/vis/known_env" />
+  <arg name="true_env_vis_topic" default="/vis/true_env" />
 
   <!-- Dummy topics that should not get published on or subscribed to. -->
-  <arg name="junk_sensor_topic" default="/$(arg prefix)/junk/sensor" />
-  <arg name="junk_updated_env_topic" default="/$(arg prefix)/junk/updated_env" />
+  <arg name="junk_sensor_topic" default="/junk/sensor" />
+  <arg name="junk_updated_env_topic" default="/junk/updated_env" />
 
   <!-- Services. -->
   <arg name="replan_srv" default="/replan" />
@@ -44,9 +48,9 @@
 
   <!-- Frames of reference. -->
   <arg name="fixed_frame" default="world" />
-  <arg name="tracker_frame" default="$(arg prefix)/tracker" />
-  <arg name="planner_frame" default="$(arg prefix)/planner" />
-  <arg name="mocap_frame" default="$(arg prefix)/vicon/cf7/cf7" />
+  <arg name="tracker_frame" default="tracker" />
+  <arg name="planner_frame" default="planner" />
+  <arg name="mocap_frame" default="vicon/cf7/cf7" />
 
   <!-- Goal point. -->
   <arg name="goal_x" default="0.0" />
@@ -339,9 +343,6 @@
     <param name="hover/x" value="$(arg takeoff_hover_x)" />
     <param name="hover/y" value="$(arg takeoff_hover_y)" />
     <param name="hover/z" value="$(arg takeoff_hover_z)" />
-
-    <param name="srv/takeoff" value="/$(arg prefix)/takeoff" />
-    <param name="srv/land" value="/$(arg prefix)/land" />
   </node>
 
   <!-- Takeoff server node. -->

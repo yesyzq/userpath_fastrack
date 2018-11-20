@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+
+<launch>
+  <!-- ========================== Additional Launch Files ========================= -->
+  <include file="$(find fastrack_crazyflie_demos)/launch/rviz.launch"/>
+  <include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch" >
+     <arg name="port" value="9090"/>
+  </include>
+
+  <group ns="drone0">
+  	<include file="$(find userpath)/launch/hw_demo.launch">
+      <arg name="uri" value="radio://0/80/250K/E7E7E7E7EE" />
+  		<arg name="prefix" value="drone1" />
+  	</include>
+  </group>
+
+  <group ns="drone1">
+  	<include file="$(find userpath)/launch/hw_demo.launch">
+      <arg name="uri" value="radio://0/80/250K/E7E7E7E7EF" />
+  		<arg name="prefix" value="drone2" />
+  	</include>
+  </group>
+
+
+  <include file="$(find userpoint_publisher)/launch/publisher.launch"> </include> 
+</launch>
