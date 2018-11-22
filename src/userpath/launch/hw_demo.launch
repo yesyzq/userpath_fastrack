@@ -3,8 +3,11 @@
 <launch>
   <!-- ========================== Additional Launch Files ========================= -->
   <!-- To change drones, change the default arg to uriA, uriB, uriC or uriD -->
-  <arg name="uri" default="$(arg uri)" />
-  <arg name="prefix" default="drone0" />
+  <arg name="uri" default="radio://0/80/250K/E7E7E7E7EE" />
+  <arg name="prefix" default="drone1" />
+  <arg name="hover_x" default="0.0" />
+  <arg name="hover_y" default="0.0" />
+  <arg name="hover_z" default="1.0" />
 
 <!-- Topics. -->
 <!--   <arg name="userpoint_topic" default="/$(arg prefix)/userpoint" /> -->
@@ -38,9 +41,9 @@
   <arg name="junk_updated_env_topic" default="/$(arg prefix)/junk/updated_env" />
 
   <!-- Services. -->
-  <arg name="replan_srv" default="/replan" />
-  <arg name="bound_srv" default="/bound" />
-  <arg name="planner_dynamics_srv" default="/planner_dynamics" />
+  <arg name="replan_srv" default="/$(arg prefix)/replan" />
+  <arg name="bound_srv" default="/$(arg prefix)/bound" />
+  <arg name="planner_dynamics_srv" default="/$(arg prefix)/planner_dynamics" />
 
   <!-- Frames of reference. -->
   <arg name="fixed_frame" default="world" />
@@ -54,9 +57,14 @@
   <arg name="goal_z" default="0.5" />
 
   <!-- Simulator params. -->
-  <arg name="takeoff_hover_x" default="0.0" />
-  <arg name="takeoff_hover_y" default="0.0" />
-  <arg name="takeoff_hover_z" default="1.0" />
+
+  <!-- <arg name="takeoff_hover_x" default="0.0" /> -->
+  <!-- <arg name="takeoff_hover_y" default="0.0" /> -->
+  <!-- <arg name="takeoff_hover_z" default="1.0" /> -->
+
+  <arg name="takeoff_hover_x" value="$(arg hover_x)" />
+  <arg name="takeoff_hover_y" value="$(arg hover_y)" />
+  <arg name="takeoff_hover_z" value="$(arg hover_z)" />
 
   <arg name="sim_init_x" default="0.0" />
   <arg name="sim_init_y" default="0.0" />
@@ -242,9 +250,6 @@
         name="mocap_frame_publisher"
         args="0 0 0 0 0 0 1 $(arg mocap_frame) $(arg tracker_frame) 100">
   </node>
-
-  <!-- Crazyflie interface. -->
-  <include file="$(find crazyflie_driver)/launch/crazyflie_server.launch" />
 
   <group ns="crazyflie">
     <include file="$(find crazyflie_driver)/launch/crazyflie_add.launch">
