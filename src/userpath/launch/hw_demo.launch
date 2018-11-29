@@ -8,6 +8,7 @@
   <arg name="hover_x" default="0.0" />
   <arg name="hover_y" default="0.0" />
   <arg name="hover_z" default="1.0" />
+  <arg name="firstgoal_x" default="0.0" />
 
 <!-- Topics. -->
 <!--   <arg name="userpoint_topic" default="/$(arg prefix)/userpoint" /> -->
@@ -52,9 +53,10 @@
   <arg name="mocap_frame" default="$(arg prefix)/vicon/cf7/cf7" />
 
   <!-- Goal point. -->
-  <arg name="goal_x" default="0.0" />
+  <!-- <arg name="goal_x" default="0.0" /> -->
+  <arg name="goal_x" value="$(arg firstgoal_x)" />
   <arg name="goal_y" default="0.0" />
-  <arg name="goal_z" default="0.5" />
+  <arg name="goal_z" default="1.0" />
 
   <!-- Simulator params. -->
 
@@ -71,9 +73,9 @@
   <arg name="sim_init_z" default="0.0" />
 
   <!-- Planner params. -->
-  <arg name="planner_vx" default="0.3" />
-  <arg name="planner_vy" default="0.3" />
-  <arg name="planner_vz" default="0.3" />
+  <arg name="planner_vx" default="0.5" />
+  <arg name="planner_vy" default="0.5" />
+  <arg name="planner_vz" default="0.5" />
   <arg name="planner_runtime" default="0.5" />
 
   <!-- Time steps. -->
@@ -82,7 +84,8 @@
   <arg name="sensor_dt" default="0.1" />
 
   <!-- Control merge mode. -->
-  <arg name="merger_mode" default="MERGE" />
+  <!-- <arg name="merger_mode" default="MERGE" /> -->
+  <arg name="merger_mode" default="PRIORITIZED" />
 
   <!-- Controller params. -->
   <arg name="tracker_x_dim" default="6" />

@@ -10,12 +10,14 @@
   <group ns="drone1">
   	<include file="$(find userpath)/launch/sw_demo.launch">
   		<arg name="prefix" value="drone1" />
+      <arg name="init_y" value="0.0" />
   	</include>
   </group>
 
   <group ns="drone2">
   	<include file="$(find userpath)/launch/sw_demo.launch">
   		<arg name="prefix" value="drone2" />
+      <arg name="init_y" value="1.0" />
   	</include>
   </group>
 

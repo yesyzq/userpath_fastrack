@@ -10,6 +10,7 @@
   <!-- Topics. -->
   <!-- <arg name="userpoint_topic" default="/userpoint" /> -->
   <arg name="prefix" default="drone0" />
+  <arg name="init_y" default="0.0" />
 
   <arg name="position_velocity_yaw_state_topic" default="/$(arg prefix)/state/position_velocity_yaw" />
   <arg name="position_velocity_state_topic" default="/$(arg prefix)/state/position_velocity" />
@@ -60,7 +61,7 @@
   <arg name="takeoff_hover_z" default="1.0" />
 
   <arg name="sim_init_x" default="0.0" />
-  <arg name="sim_init_y" default="0.0" />
+  <arg name="sim_init_y" value="$(arg init_y)" />
   <arg name="sim_init_z" default="0.0" />
 
   <!-- Planner params. -->

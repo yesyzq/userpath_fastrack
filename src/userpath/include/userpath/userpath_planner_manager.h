@@ -116,7 +116,7 @@ bool UserpathPlannerManager<S>::RegisterCallbacks(const ros::NodeHandle& n) {
 template<typename S>
 void UserpathPlannerManager<S>::UserpointCallback(const userpath_msgs::UserpointInstruction::ConstPtr& msg) {
 
-  ROS_INFO("Received a UserpointInstruction");
+  ROS_INFO("UserpointInstruction [%s]", msg->action.c_str());
  
   if(msg->action=="ADD"){
     // ADD
@@ -210,6 +210,8 @@ void UserpathPlannerManager<S>::MaybeRequestTrajectory() {
 
   if (!this->ready_ || this->waiting_for_traj_)
     return;
+
+  ROS_INFO("after VisualizeGoal");
 
   // Set start and goal states.
   fastrack_msgs::ReplanRequest msg;
